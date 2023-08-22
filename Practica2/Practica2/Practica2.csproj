@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\DivisionesExtensions.cs" />
     <Compile Include="Excepciones\ExcepcionCustomizada.cs" />
     <Compile Include="Excepciones\Logica.cs" />
     <Compile Include="Program.cs" />

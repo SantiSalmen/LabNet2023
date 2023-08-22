@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Practica2
+namespace Practica2.Excepciones
 {
     public class ExepcionCustomizada : Exception
     {
@@ -15,7 +15,7 @@ namespace Practica2
         {
 
 
-            return $"su mensaje es {mensaje}";
+            return $"Su mensaje es {mensaje}";
         }
     }
 }

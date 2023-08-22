@@ -1,19 +1,40 @@
 ﻿using System;
 using Practica2.Excepciones;
+using Practica2.Extensions;
 
 namespace Practica2
 {
-    class Program
+    class Program 
     {
         static void Main(string[] args)
         {
-            int dividendo, divisor;
+            int dividendo1 = 0;
+            double dividendo2, divisor;
+            bool seguir = true;
 
-            Console.WriteLine("Introduzca un numero para que este sea dividido por 0");
+            Console.WriteLine("Ejercicio n°1\n");
+            while (seguir)
+            {
 
-            dividendo = int.Parse(Console.ReadLine()); 
+                Console.WriteLine("Introduzca un numero para que este sea dividido por 0");
+                try
+                {
+                    dividendo1 = int.Parse(Console.ReadLine());
+                    seguir = false;
 
-            DividirCero(dividendo);
+                }
+                catch (FormatException)
+                {
+
+                    Console.WriteLine("Eso no es un numero!"); 
+                }
+                
+            }
+            
+
+            Console.WriteLine(dividendo1.Dividir());
+
+            Console.WriteLine("\nEjercicio n°2\n");
 
             Console.WriteLine("A continuación introuzca dos numero,primero el dividendo y luego el divisor");
 
@@ -21,9 +42,9 @@ namespace Practica2
 
             try
             {
-                dividendo = int.Parse(Console.ReadLine());
-                divisor = int.Parse(Console.ReadLine());
-                Dividir(dividendo, divisor);
+                dividendo2 = double.Parse(Console.ReadLine());
+                divisor = double.Parse(Console.ReadLine());
+                Console.WriteLine(dividendo2.Dividir(divisor));
 
             }
             catch (Exception)
@@ -31,6 +52,7 @@ namespace Practica2
                 Console.WriteLine("¡Seguro Ingreso una letra o no ingreso nada!");
             }
 
+            Console.WriteLine("\nEjercicio n°3\n");
 
             try
             {
@@ -42,6 +64,7 @@ namespace Practica2
                 Console.WriteLine(e.StackTrace);
             }
 
+            Console.WriteLine("\nEjercicio n°4\n");
 
             try
             {
@@ -58,48 +81,5 @@ namespace Practica2
             Console.ReadKey();
 
         }
-
-       private static int DividirCero(int dividendo)
-        {
-            try
-            {
-                return dividendo /= 0;
-            }
-            catch (DivideByZeroException ex)
-            {
-                Console.WriteLine(ex.Message);
-
-                return-1;
-            }
-            finally
-            {
-                Console.WriteLine("La operacón fue realizada");
-            }
-
-
-        }
-            
-        public static double Dividir(int dividendo, int divisor) 
-        {
-            double resultado;
-            try
-            {
-               return resultado = dividendo / divisor;
-            }
-            catch (DivideByZeroException ex)
-            {   
-
-                //TODO : Mensaje creativo
-                Console.WriteLine("");
-                Console.WriteLine(ex.Message);
-                return-1;
-            }
-            finally
-            {
-                Console.WriteLine("La operacón fue realizada");
-            }
-      
-        }
-    
     }
 }
