@@ -6,7 +6,6 @@ namespace Practica2.Extensions.Tests
     public class DivisionesExtensionsTests
     {
 
-        //TODO: Asserts para controlar las exepciones del metodo dividir.
         [TestMethod()]
         public void DividirTest()
         {
