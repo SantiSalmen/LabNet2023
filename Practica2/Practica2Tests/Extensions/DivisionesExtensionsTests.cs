@@ -1,10 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Practica2.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Practica2.Extensions.Tests
 {
@@ -17,14 +11,18 @@ namespace Practica2.Extensions.Tests
         public void DividirTest()
         {
             // Arrange
-            int Dividendo1 = 12;
-            double Dividendo2 = 10;
+            int dividendo1 = 10, resultadoEsperado = 2, falloEsperado = -1, fallo1, fallo2, resultado;
+
 
             // act
-            Dividendo1.Dividir();
-            Dividendo2.Dividir(10);
-            Dividendo2.Dividir(0);
+            fallo1 = dividendo1.Dividir();
+            resultado = dividendo1.Dividir(5);
+            fallo2 = dividendo1.Dividir(0);
 
+            //Asserts
+            Assert.AreEqual(falloEsperado, fallo1);
+            Assert.AreEqual(resultado, resultadoEsperado);
+            Assert.AreEqual(falloEsperado, fallo2);
         }
     }
 }

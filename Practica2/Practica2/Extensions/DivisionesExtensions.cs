@@ -5,9 +5,9 @@ namespace Practica2.Extensions
     public static class DivisionesExtensions
     {
 
-        public static double Dividir(this double dividendo2, double divisor)
+        public static int Dividir(this int dividendo2, int divisor)
         {
-            double resultado;
+            int resultado;
             try
             {
                 return resultado = dividendo2 / divisor;

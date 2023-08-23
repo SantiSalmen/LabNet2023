@@ -8,8 +8,7 @@ namespace Practica2
     {
         static void Main(string[] args)
         {
-            int dividendo1 = 0;
-            double dividendo2, divisor;
+            int dividendo1= 0, divisor;
             bool seguir = true;
 
             Console.WriteLine("Ejercicio n°1\n");
@@ -42,12 +41,12 @@ namespace Practica2
 
             try
             {
-                dividendo2 = double.Parse(Console.ReadLine());
-                divisor = double.Parse(Console.ReadLine());
-                Console.WriteLine(dividendo2.Dividir(divisor));
+                dividendo1 = int.Parse(Console.ReadLine());
+                divisor = int.Parse(Console.ReadLine());
+                Console.WriteLine(dividendo1.Dividir(divisor));
 
             }
-            catch (Exception)
+            catch (FormatException)
             {
                 Console.WriteLine("¡Seguro Ingreso una letra o no ingreso nada!");
             }
