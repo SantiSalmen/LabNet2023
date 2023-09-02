@@ -14,8 +14,9 @@ namespace Practica3.EF.Logic
         public BaseLogic()
         {
             context = new NorthwindContext();
+
         }
 
-
+        
     }
 }
