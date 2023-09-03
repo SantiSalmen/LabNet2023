@@ -9,25 +9,66 @@ namespace Practica4.LINQ.Logic
 {
     public class ProductsLogic : BaseLogic
     {
-        public List<Object> StocklessProducts()
+
+        protected readonly Products dBproducts;
+        public ProductsLogic()
+        {
+            dBproducts = new Products();
+        }
+        public List<Products> StocklessProducts()
         {
 
             var query2 = from Products in context.Products
                          where Products.UnitsInStock == 0
                          select Products;
 
-            List<Object> list = new List<Object>(query2);
 
-            return list;
+            return query2.ToList();
         }
 
-        public List<Object> MoreThan3() 
+        public List<Products> MoreThan3() 
         {
             var query3 = context.Products.Where(e => e.UnitsInStock > 0 && e.UnitPrice > 3);
 
-            List<Object> list = new List<Object>(query3);
 
-            return list;
+            return query3.ToList();
+        }
+
+        public List<Products> NameProducts() 
+        {
+            var query9 = context.Products.OrderBy(e => e.ProductName).ToList();
+
+            return query9;
+        }
+
+        public List<Products> StockOrder()
+        {
+            var query10 = context.Products.OrderByDescending(e => e.UnitsInStock).ToList();
+
+            return query10;
+        }
+
+        public List<object> CategoryProducts()
+        {
+            var query11 = from Products in context.Products
+                          join Categories in context.Categories on Products.CategoryID equals Categories.CategoryID
+                          orderby Categories.CategoryID
+                          select new
+                          {
+                              Categoria = Categories.CategoryName,
+                              Productos = Products.ProductName,
+                          };
+
+
+
+            return query11.ToList<object>();
+        }
+
+        public Products FirstProduct()
+        {
+            var query10 = context.Products.First();
+
+            return query10;
         }
     }
 }

@@ -24,13 +24,13 @@ namespace Practica4.LINQ
                                     "3. Lista de Productos en stock +$3\n" +
                                     "4. Lista de clientes de Wa\n" +
                                     "5. Ejercicio 5\n" +
-                                    "6. Ejercicio 6\n" +
-                                    "7. Ejercicio 7\n" +
-                                    "8. Ejercicio 8\n" +    
-                                    "9. Ejercicio 9\n" +
-                                    "10 Ejercicio 10\n" +
-                                    "11. Ejercicio 11\n" +
-                                    "12. Ejercicio 12\n" +
+                                    "6. Nombres de los Clientes en mayuscula y minuscula" +
+                                    "7. Lista de Clientes de Wa y productos de 1997 para arriba\n" +
+                                    "8. Lista de los tres primeros Clientes de Wa\n" +
+                                    "9. Lista de Productos ordenados por nombre\n" +
+                                    "10. Lista de Productos ordenados por stock, de mayor a menor\n" +
+                                    "11. Lista de Categorias y sus productos\n" +
+                                    "12. Primer Producto de la lista\n" +
                                     "13. Ejercicio 13\n" +
                                     "0. Salir");
                 try
@@ -96,29 +96,79 @@ namespace Practica4.LINQ
 
                     case 6:
 
+                        Console.WriteLine("Nombre de los Clientes:\n");
+
+                        foreach (Customers customers in customersLogic.CustomersName())
+                        {
+                            Console.WriteLine($"[ID]{customers.CustomerID} - NombreMinus: {customers.ContactName.ToLower()} - NombreMayus: {customers.ContactName.ToUpper()}");
+                        }
+
                         break;
 
                     case 7:
+                        
+                        Console.WriteLine("Clientes de Wa y Regiones :\n");
+
+                        foreach (object customers in customersLogic.JoinOrders())
+                        {
+                            Console.WriteLine(customers);
+                        }
 
                         break;
 
                     case 8:
+                        
+                        Console.WriteLine("Tres primeros clientes de Wa:\n");
+
+                        foreach (Customers customers in customersLogic.ThreeFirst())
+                        {
+                            Console.WriteLine($"[ID]{customers.CustomerID} - Nombre: {customers.ContactName} - Reguion: {customers.Region}");
+                        }
 
                         break;
 
                     case 9:
 
+                        Console.WriteLine("Productos ordenados por nombre:\n");
+
+                        foreach (Products products in productsLogic.NameProducts())
+                        {
+                            Console.WriteLine($"[ID]{products.ProductID} - [Nombre]{products.ProductName}");
+                        }
+
                         break;
 
                     case 10:
+
+                        Console.WriteLine("Productos ordenados por stock:\n");
+
+                        foreach (Products products in productsLogic.StockOrder())
+                        {
+                            Console.WriteLine($"[ID]{products.ProductID} - [Stock]{products.UnitsInStock} - [Nombre]{products.ProductName}");
+                        }
 
                         break;
 
                     case 11:
 
+                        Console.WriteLine("Categorias de los productos:\n");
+
+                        foreach (object products in productsLogic.CategoryProducts())
+                        {
+                            Console.WriteLine(products);
+                        }
+
                         break;
 
                     case 12:
+
+                        Console.WriteLine("Primer producto:\n");
+
+                        Products productRef = productsLogic.FirstProduct();
+
+
+                            Console.WriteLine($"[ID]{productRef.ProductID} - [Nombre] {productRef.ProductName}");
+                       
 
                         break;
 
