@@ -66,9 +66,9 @@ namespace Practica4.LINQ.Logic
 
         public Products FirstProduct()
         {
-            var query10 = context.Products.First();
+            var query12 = context.Products.First();
 
-            return query10;
+            return query12;
         }
     }
 }

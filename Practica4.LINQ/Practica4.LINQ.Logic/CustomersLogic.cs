@@ -18,14 +18,19 @@ namespace Practica4.LINQ.Logic
             dBcustomers = new Customers();
         }
 
-        public List<Customers> GetCustomers()
+        public List<Customers> GetAllCustomers() 
+        {
+            var list = context.Customers.ToList();
+
+            return list;
+        }
+        public Customers GetCustomer(string id)
         {
 
-            var query1 = from Customers in context.Customers
-                         select Customers;
+            var query1 = context.Customers.Where(e => e.CustomerID == id).FirstOrDefault();
 
 
-            return query1.ToList();
+            return query1;
         }
 
         public List<Customers> WaCustomers()
@@ -54,10 +59,10 @@ namespace Practica4.LINQ.Logic
                                         RegionDelCliente = Customers.Region,
                                         Ordenes = Orders.OrderID,
                                         FechaDeOrden = Orders.OrderDate
-                                       }).Distinct();
+                                       }).Distinct().ToList<object>();
                    
 
-            return query7.ToList<object>();
+            return query7;
         }
 
         public List<Customers> ThreeFirst() 
@@ -68,6 +73,23 @@ namespace Practica4.LINQ.Logic
                          select Customers).Take(3).ToList();
                          
             return query8;
+        }
+
+        public List<object> CantOrders()
+        {
+
+            var query13 = context.Customers.Join(context.Orders,
+                                                 customers => customers.CustomerID,
+                                                 orders => orders.CustomerID,
+                                                 (customers, orders) => new
+                                                 {
+                                                     Ordenes = orders.OrderID,
+                                                     ClientesID = customers.CustomerID,
+                                                     NombreCliente = customers.ContactName,
+                                                 }).GroupBy(e => e.ClientesID).ToList<object>();
+
+
+            return query13;
         }
     }
 }

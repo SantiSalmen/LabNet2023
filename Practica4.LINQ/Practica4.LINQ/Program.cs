@@ -48,13 +48,28 @@ namespace Practica4.LINQ
                 {
                     case 1:
 
-                        Console.WriteLine("Clientes:\n");
 
-                        foreach (Customers customers in customersLogic.GetCustomers())
+                        customersLogic.GetAllCustomers().ForEach(x => Console.WriteLine($"[ID]{x.CustomerID} - [NOMBRE]{x.ContactName}"));
+                        string id = "";
+                        bool comprobarId = true;
+
+                        while (comprobarId)
                         {
-                            Console.WriteLine($"[{customers.CustomerID}] - {customers.CompanyName} - {customers.ContactName}" +
-                                              $"{customers.ContactTitle} - {customers.City} - {customers.Phone}");
+                            Console.WriteLine("Seleccione cliente por su Id:\n");
+                            id = Console.ReadLine();
+                            foreach (Customers customers in customersLogic.GetAllCustomers())
+                            {
+                                if (id.ToLower() == customers.CustomerID.ToLower())
+                                {
+                                    comprobarId = false;
+                                }
+                            }
                         }
+
+                        Customers customer = customersLogic.GetCustomer(id);
+
+                        Console.WriteLine($"[ID]{customer.CustomerID} - [NOMBRE]{customer.ContactName}");
+                        
 
                         break;
 
@@ -169,10 +184,18 @@ namespace Practica4.LINQ
 
                             Console.WriteLine($"[ID]{productRef.ProductID} - [Nombre] {productRef.ProductName}");
                        
-
                         break;
 
                     case 13:
+
+                        Console.WriteLine("Clientes con sus ordenes asociads:\n");
+
+                    
+
+                        foreach (var customers in customersLogic.CantOrders())
+                        {
+                            Console.WriteLine(customers);
+                        }
 
                         break;
 
