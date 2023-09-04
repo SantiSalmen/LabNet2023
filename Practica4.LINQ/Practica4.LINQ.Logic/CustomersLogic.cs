@@ -78,15 +78,17 @@ namespace Practica4.LINQ.Logic
         public List<object> CantOrders()
         {
 
-            var query13 = context.Customers.Join(context.Orders,
+             var query13 = context.Customers.Join(context.Orders,
                                                  customers => customers.CustomerID,
                                                  orders => orders.CustomerID,
                                                  (customers, orders) => new
                                                  {
-                                                     Ordenes = orders.OrderID,
                                                      ClientesID = customers.CustomerID,
                                                      NombreCliente = customers.ContactName,
-                                                 }).GroupBy(e => e.ClientesID).ToList<object>();
+                                                     Ordenes = orders.CustomerID.Count(),
+                                                 })
+                                            .GroupBy(e => e.ClientesID)
+                                            .ToList<object>();
 
 
             return query13;

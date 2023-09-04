@@ -2,8 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Practica4.LINQ.Entities;
 
 namespace Practica4.LINQ.Logic
 {
@@ -34,6 +33,17 @@ namespace Practica4.LINQ.Logic
             return query3.ToList();
         }
 
+        public Products SpecificId()
+        {
+       
+                var query5 = (from Products in context.Products
+                         where Products.ProductID == 789
+                         select Products).FirstOrDefault();
+
+                return query5;
+
+     
+        }
         public List<Products> NameProducts() 
         {
             var query9 = context.Products.OrderBy(e => e.ProductName).ToList();

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Common.CommandTrees;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -107,6 +109,20 @@ namespace Practica4.LINQ
 
                     case 5:
 
+                        Console.WriteLine("Producto con Id 789:\n");                       
+                        Products refPoduct = productsLogic.SpecificId(); 
+
+                            if (refPoduct == null)
+                            {
+                                Console.WriteLine(refPoduct);
+                                Console.WriteLine("El objeto es Nulo");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"[ID]{refPoduct.ProductID} - [Nombre] {refPoduct.ProductName}");
+
+                            }
+                        
                         break;
 
                     case 6:
@@ -182,7 +198,7 @@ namespace Practica4.LINQ
                         Products productRef = productsLogic.FirstProduct();
 
 
-                            Console.WriteLine($"[ID]{productRef.ProductID} - [Nombre] {productRef.ProductName}");
+                        Console.WriteLine($"[ID]{productRef.ProductID} - [Nombre] {productRef.ProductName}");
                        
                         break;
 
@@ -190,11 +206,11 @@ namespace Practica4.LINQ
 
                         Console.WriteLine("Clientes con sus ordenes asociads:\n");
 
-                    
 
-                        foreach (var customers in customersLogic.CantOrders())
+                        var cs = customersLogic.CantOrders();
+                        foreach (var customers in cs)
                         {
-                            Console.WriteLine(customers);
+                            Console.WriteLine($"{customers}");
                         }
 
                         break;
