@@ -75,20 +75,24 @@ namespace Practica4.LINQ.Logic
             return query8;
         }
 
-        public List<object> CantOrders()
+        public List<CustomerOrdersDTO> CantOrders()
         {
 
-             var query13 = context.Customers.Join(context.Orders,
+             var query13 = context.Customers.GroupJoin(context.Orders,
                                                  customers => customers.CustomerID,
                                                  orders => orders.CustomerID,
                                                  (customers, orders) => new
                                                  {
-                                                     ClientesID = customers.CustomerID,
-                                                     NombreCliente = customers.ContactName,
-                                                     Ordenes = orders.CustomerID.Count(),
+                                                     ClientesID = customers,
+                                                     Ordenes = orders
                                                  })
-                                            .GroupBy(e => e.ClientesID)
-                                            .ToList<object>();
+                                            .Select(c => new CustomerOrdersDTO
+                                            {
+                                                customer = c.ClientesID,
+
+                                                associatedOrders = c.Ordenes.Count()
+                                            })
+                                            .ToList();
 
 
             return query13;

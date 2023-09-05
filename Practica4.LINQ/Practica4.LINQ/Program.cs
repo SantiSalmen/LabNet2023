@@ -25,7 +25,7 @@ namespace Practica4.LINQ
                                     "2. Lista de Productos sin stock\n" +
                                     "3. Lista de Productos en stock +$3\n" +
                                     "4. Lista de clientes de Wa\n" +
-                                    "5. Ejercicio 5\n" +
+                                    "5. Producto con id 789 o nulo\n" +
                                     "6. Nombres de los Clientes en mayuscula y minuscula" +
                                     "7. Lista de Clientes de Wa y productos de 1997 para arriba\n" +
                                     "8. Lista de los tres primeros Clientes de Wa\n" +
@@ -33,7 +33,7 @@ namespace Practica4.LINQ
                                     "10. Lista de Productos ordenados por stock, de mayor a menor\n" +
                                     "11. Lista de Categorias y sus productos\n" +
                                     "12. Primer Producto de la lista\n" +
-                                    "13. Ejercicio 13\n" +
+                                    "13. Clientes con su cantidad de Ordenes asociadas\n" +
                                     "0. Salir");
                 try
                 {
@@ -205,12 +205,11 @@ namespace Practica4.LINQ
                     case 13:
 
                         Console.WriteLine("Clientes con sus ordenes asociads:\n");
+                        List<CustomerOrdersDTO> customerOrdersDTOs = customersLogic.CantOrders();
 
-
-                        var cs = customersLogic.CantOrders();
-                        foreach (var customers in cs)
+                        foreach (var customers in customerOrdersDTOs)
                         {
-                            Console.WriteLine($"{customers}");
+                            Console.WriteLine($"[Cliente] ID: {customers.customer.CustomerID} Nombre: {customers.customer.ContactName} - [OrdenesAsociada]: {customers.associatedOrders}");
                         }
 
                         break;
