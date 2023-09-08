@@ -1,0 +1,66 @@
+html{
+    font-family:'Courier New', Courier, monospace;
+    color: white;
+    
+}
+    
+body{
+    
+    background-image: url(image2.png)
+    
+}
+
+#main{
+    width: 60%;
+    position:relative;
+    left: 21%;
+    text-align:center;
+    margin-block:5%;
+    padding:15px 15px;
+}
+
+main{
+    border-style: solid;
+    border-color: rgb(0, 219, 48);
+    border-radius: 5px;
+    border-width: 4px;
+
+    background-color: black;
+}
+
+.btn{
+
+    color: rgb(0, 219, 48);
+    border-style: solid;
+    border-color: rgb(0, 219, 48);
+    border-radius: 5px;
+    border-width: 4px;
+    background-color: black;
+}
+
+.windowContainer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:black;
+    z-index: 1;
+    visibility: visible;
+}
+
+.windowContent{
+    width: 450px;
+    height: auto;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(0, 0, 0);
+    text-align: center;
+}
+
+.windowContent h1{
+    color:rgb(0, 219, 48)
+}

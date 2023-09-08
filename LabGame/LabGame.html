@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ES">
+<head>
+    <meta charset="utf-8">
+    <title id="title">Adivinar el Numero!</title>
+    <link rel="stylesheet" href="LabGame.css"  
+</head>
+<body>
+    <main id = "main">
+        <h1>Adivar el Numero!</h1>
+        <p>El numero que estas buscando está entre 1 y 20.</p>
+        <p>Encuentralo antes de que vida llegue a 0 y salvarás a los los chicos del Lab.</p>
+        <section>
+            <form  action= "" class = "form">
+                <label for="guessNum" class = "order">Elija un numero</label>
+                <input id="guessNum" type="text">
+                <input id="subbutton" type="submit" value="Enviar">
+                <p>Pistas: <span id="gameMessege"></span></p>
+            </form>
+        </section>        
+        <section>   
+            <p>Intentos: <span class="Trys"></span></p>
+            <p>Vidas restantes: <span class="lives">5</span></p>
+            <p>Puntaje más alto: <span class="highscore"></span></p>
+            <button type="button" class="btn" id = "restartbutton">Reiniciar</button>
+        </section>        
+    </main>
+    <div id="windowId" class="windowContainer">
+    <div class="windowContent">
+            <h1>Completa la contraseña</h1>
+            <p>Los chicos de NeoLab han perdido el último número de la contraseña del proyecto
+                y necesitan tu ayuda para encontrarla.
+            </p><br>
+            <p>Tienes 5 intentos antes de que el sistema bloquee el usuario, ayudalos a conservar su trabajo!!</p>
+            <button type="button" class="btn" id ="start">Iniciar</button>
+    </div>
+    </div>
+    <script defer src = "LabGame.js"></script>
+</body>
+</html>
