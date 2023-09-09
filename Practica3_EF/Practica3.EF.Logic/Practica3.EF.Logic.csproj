@@ -51,6 +51,7 @@
     <Compile Include="BaseLogic.cs" />
     <Compile Include="CustomersLogic.cs" />
     <Compile Include="EmployeesLogic.cs" />
+    <Compile Include="ILogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

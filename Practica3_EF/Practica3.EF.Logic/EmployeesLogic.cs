@@ -1,9 +1,6 @@
 ﻿using Practica3.EF.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Practica3.EF.Logic
 {
@@ -18,18 +15,13 @@ namespace Practica3.EF.Logic
         public void Delete(Employees deleteEmployee)
         {
 
-            var employeeDelete = context.Employees.Find(deleteEmployee.EmployeeID);
+            Employees employeeDelete = context.Employees.Find(deleteEmployee.EmployeeID);
 
 
             List<Territories> territoriesList = new List<Territories>(deleteEmployee.Territories);
 
             foreach (var territories in territoriesList)
             {
-              //  List<Order_Details> detailsList = new List<Order_Details>(orders.Order_Details);
-                //foreach (var dOrders in detailsList)
-                //{
-                  //  context.Order_Details.Remove(dOrders);
-                //}
                 context.Territories.Remove(territories);
 
             }

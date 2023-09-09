@@ -1,8 +1,5 @@
 using Practica3.EF.Entities;
-using System;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
-using System.Linq;
 
 namespace Practica3.EF.Data
 {

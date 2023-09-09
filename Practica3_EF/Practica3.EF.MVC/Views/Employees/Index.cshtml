@@ -1,0 +1,39 @@
+﻿@model List<Practica3.EF.MVC.Models.EmployeesView>
+
+
+@{
+    ViewBag.Title = "Employees Page";
+}
+<h1>Index Emplyees</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+         
+        <td scope="col">Id </td>
+        <td scope="col">Nombre </td>
+        <td scope="col">Apellido </td>
+        <td scope="col">Action</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+         
+        </tr>
+
+    @foreach (var employee in Model)
+    {
+        <tr>
+            <td scope="row">@employee.id</td>
+            <td>@employee.firstName</td>
+            <td>@employee.lastName</td>
+            <td>@Html.ActionLink("Borrar", "Delete", new { id = employee.id})</td>
+        </tr>
+    }
+ 
+    </tbody>
+</table>
+<div>
+    @Html.ActionLink("Insertar Nuevo Empleado", "Insert")
+</div>
+
