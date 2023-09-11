@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Aplicacion de Ajax</title>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+
+    <table class="table">
+        <thead>
+            <tr>               
+                <td scope="col">Nombre </td>
+                <td scope="col">NombreDeUsuario </td>
+                <td scope="col">Email</td>
+                <td scope="col">Telefono</td>
+                <td scope="col">SitioWeb</td>
+            </tr>
+        </thead>
+        <tbody id = "tbodyUsers">
+  
+        </tbody>
+    </table>
+    <script id= "script">
+        function listUsers()
+        {
+            $.ajax
+                (
+                    {
+                        type: 'GET',
+                        url: 'https://jsonplaceholder.typicode.com/users',
+                        datatype: 'JSON',
+                        beforeSend: function ()
+                        {
+                            console.log('antes de la peticion..');
+                        },
+                        success: function (data) {
+                            let users = data;
+                            let value = '';
+                            for (var i = 0; i < users.length; i++) {
+
+                                value += ' <tr>' +                                   
+                                    '<td>' + users[i].name + '</td>' +
+                                    '<td>' + users[i].username + '</td>' +
+                                    '<td>' + users[i].email + '</td>' +
+                                    '<td>' + users[i].phone + '</td>' +
+                                    '<td>' + users[i].website + '</td>' +
+                                    '</tr >';
+                            }
+
+                            $('#tbodyUsers').html(value);
+                        },
+
+                        complete: function () {
+                            console.log(`solicitud compelta: ${users.length}`);
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    }
+                );
+        };
+
+                $(document).ready(function ($){
+                     listUsers();
+                });
+    </script>
+</body>
+</html>

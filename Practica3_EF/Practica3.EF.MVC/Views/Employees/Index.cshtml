@@ -9,11 +9,12 @@
 <table class="table">
     <thead>
         <tr>
-         
-        <td scope="col">Id </td>
-        <td scope="col">Nombre </td>
-        <td scope="col">Apellido </td>
-        <td scope="col">Action</td>
+
+            <td scope="col">Id </td>
+            <td scope="col">Nombre </td>
+            <td scope="col">Apellido </td>
+            <td scope="col">Action</td>
+            <td scope="col">Action</td>
         </tr>
     </thead>
     <tbody>
@@ -27,13 +28,14 @@
             <td scope="row">@employee.id</td>
             <td>@employee.firstName</td>
             <td>@employee.lastName</td>
-            <td>@Html.ActionLink("Borrar", "Delete", new { id = employee.id})</td>
+            <td>@Html.ActionLink("Actualizar", "UpdateInsert", new { id = employee.id })</td>
+            <td>@Html.ActionLink("Borrar", "Delete", new { id = employee.id }, new { onclick = "return confirm('Estas seguro de borrar?')" })</td>
         </tr>
     }
  
     </tbody>
 </table>
 <div>
-    @Html.ActionLink("Insertar Nuevo Empleado", "Insert")
+    @Html.ActionLink("Insertar Empleado", "UpdateInsert")
 </div>
 
