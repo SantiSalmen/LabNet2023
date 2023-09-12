@@ -4,15 +4,22 @@
     ViewBag.Title = "Employees Page";
 }
 
-<h1>Vista para insertar</h1>
+<h1>Vista para reeditar/insertar</h1>
 
 @using (Html.BeginForm("UpdateInsert", "Employees", FormMethod.Post))
 {
 
     <label>Nombre</label>@Html.TextBoxFor(e => e.firstName, "", new { @class = "form-control" })
-        <label>@Html.ValidationMessageFor(e => e.firstName, "", new { @class = "text-danger" })</label><br />
-    
+    <label></label>@Html.ValidationMessageFor(e => e.firstName, "", new { @class = "text-danger" })
+    <br />
+
     <label>Apellido</label>@Html.TextBoxFor(e => e.lastName, "", new { @class = "form-control" })
-        <label></label>@Html.ValidationMessageFor(e => e.lastName, "", new { @class = "text-danger" })<br />
+    <label></label>@Html.ValidationMessageFor(e => e.lastName, "", new { @class = "text-danger" })
+    <br />
+
+    <label>Telefonno</label>@Html.TextBoxFor(e => e.homePhone, "", new { @class = "form-control" })
+    <p>Numero de 10 a 15 caracteres</p>
+    <label></label>@Html.ValidationMessageFor(e => e.homePhone, "", new { @class = "text-danger" })
+    <br />
     <input type="submit" class="btn btn-success" value="Save" />
 }

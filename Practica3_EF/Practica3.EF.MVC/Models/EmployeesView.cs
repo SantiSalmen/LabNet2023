@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Practica3.EF.MVC.Models
 {
@@ -12,11 +8,18 @@ namespace Practica3.EF.MVC.Models
         public int id { get; set; }
      
         [Required]
+        [Display(Name = "Nombre")]
         [StringLength(20)]
         public string firstName { get; set; }
 
         [Required]
+        [Display(Name = "Apellido")]
         [StringLength(20)]
         public string lastName { get; set; }
+
+        [MaxLength(15, ErrorMessage ="No cumple con el formato requerido")]
+        [MinLength(10, ErrorMessage = "No cumple con el formato requerido")]
+        [Display(Name = "Telefono")]
+        public string homePhone { get; set; }
     }
 }

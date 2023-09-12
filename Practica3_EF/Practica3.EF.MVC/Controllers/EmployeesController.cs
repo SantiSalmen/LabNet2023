@@ -20,6 +20,7 @@ namespace Practica3.EF.MVC.Controllers
                 id = e.EmployeeID,
                 firstName = e.FirstName,
                 lastName = e.LastName,
+                homePhone = e.HomePhone,
             }).ToList();
             return View(employeesViews);
         }
@@ -58,13 +59,13 @@ namespace Practica3.EF.MVC.Controllers
             
             if(employee.id == 0)
             {
-                Employees employeesEntity = new Employees { FirstName = employee.firstName, LastName = employee.lastName };
+                Employees employeesEntity = new Employees { FirstName = employee.firstName, LastName = employee.lastName, HomePhone = employee.homePhone};
                 logic.Add(employeesEntity);
                 return RedirectToAction("Index");
             }
             else
             {
-                Employees employeesEntity = new Employees { EmployeeID = employee.id, FirstName = employee.firstName, LastName = employee.lastName };
+                Employees employeesEntity = new Employees { EmployeeID = employee.id, FirstName = employee.firstName, LastName = employee.lastName, HomePhone = employee.homePhone };
                 logic.Update(employeesEntity);
                 return RedirectToAction("Index");
 

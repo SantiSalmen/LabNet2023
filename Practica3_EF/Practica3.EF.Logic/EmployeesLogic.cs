@@ -17,30 +17,35 @@ namespace Practica3.EF.Logic
 
             Employees employeeDelete = context.Employees.Find(deleteEmployee.EmployeeID);
 
-
-            List<Territories> territoriesList = new List<Territories>(deleteEmployee.Territories);
-
-            foreach (var territories in territoriesList)
+            if (employeeDelete != null)
             {
-                context.Territories.Remove(territories);
+                List<Territories> territoriesList = new List<Territories>(deleteEmployee.Territories);
 
-            }
-
-            List<Orders> orderList = new List<Orders>(deleteEmployee.Orders);
-
-            foreach (var orders in orderList)
-            {
-                List<Order_Details> detailsList = new List<Order_Details>(orders.Order_Details);
-                foreach (var dOrders in detailsList)
+                foreach (var territories in territoriesList)
                 {
-                    context.Order_Details.Remove(dOrders);
+                    context.Territories.Remove(territories);
+
                 }
-                context.Orders.Remove(orders);
+
+                List<Orders> orderList = new List<Orders>(deleteEmployee.Orders);
+
+                foreach (var orders in orderList)
+                {
+                    List<Order_Details> detailsList = new List<Order_Details>(orders.Order_Details);
+                    foreach (var dOrders in detailsList)
+                    {
+                        context.Order_Details.Remove(dOrders);
+                    }
+                    context.Orders.Remove(orders);
+
+                }
+                    
+                context.Employees.Remove(employeeDelete);
+
+                context.SaveChanges();
 
             }
-            context.Employees.Remove(employeeDelete);
 
-            context.SaveChanges();
 
         }
 

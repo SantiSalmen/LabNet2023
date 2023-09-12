@@ -4,17 +4,18 @@
 @{
     ViewBag.Title = "Employees Page";
 }
-<h1>Index Emplyees</h1>
+<h1>Index Employees</h1>
 
 <table class="table">
     <thead>
         <tr>
 
-            <td scope="col">Id </td>
+            <td scope="col">ID </td>
             <td scope="col">Nombre </td>
             <td scope="col">Apellido </td>
-            <td scope="col">Action</td>
-            <td scope="col">Action</td>
+            <td scope="col">Telefono </td>
+            <td scope="col">Funciones</td>
+            <td scope="col"></td>
         </tr>
     </thead>
     <tbody>
@@ -28,7 +29,8 @@
             <td scope="row">@employee.id</td>
             <td>@employee.firstName</td>
             <td>@employee.lastName</td>
-            <td>@Html.ActionLink("Actualizar", "UpdateInsert", new { id = employee.id })</td>
+            <td>@employee.homePhone</td>
+            <td>@Html.ActionLink("Reeditar", "UpdateInsert", new { id = employee.id })</td>
             <td>@Html.ActionLink("Borrar", "Delete", new { id = employee.id }, new { onclick = "return confirm('Estas seguro de borrar?')" })</td>
         </tr>
     }
