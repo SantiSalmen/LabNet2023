@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Pokemon API</title>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+    <h1>Pokemon API</h1>
+
+    <label>
+        <input id="pokemonName" type="text" placeholder="Nombre del Pokemon" />
+        <button id="search">Buscar</button>
+    </label>
+
+    <div class="pokemonBox">
+       
+    </div>
+
+    <script id="script">
+
+        document.querySelector('#search').addEventListener('click', GetPokemon);
+
+        function ToLower(string) {
+            return string.toLowerCase();
+        }
+
+        function GetPokemon(e)
+        {
+            const name = document.querySelector('#pokemonName').value;
+            const pokemonName = ToLower(name);
+            fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    document.querySelector('.pokemonBox').innerHTML = `
+                        <img src="${data.sprites.other["official-artwork"].front_default}" alt="${data.name}" />
+                        <div class="pokemonInfo">
+                            <h1>Nombre: ${data.name}</h1>
+                            <p>Peso: ${data.weight}</p>
+                        </div>
+                    `
+                })
+                .catch((err) => {
+                    alert("No se encontró el Pokemon");
+                });
+
+            e.preventDefault();
+            
+        };
+
+    </script>
+</body>
+</html>

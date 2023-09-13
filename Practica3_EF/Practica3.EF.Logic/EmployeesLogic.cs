@@ -1,6 +1,7 @@
 ﻿using Practica3.EF.Entities;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Practica3.EF.Logic
 {
@@ -12,13 +13,14 @@ namespace Practica3.EF.Logic
 
             context.SaveChanges();
         }
+
         public void Delete(Employees deleteEmployee)
         {
 
             Employees employeeDelete = context.Employees.Find(deleteEmployee.EmployeeID);
-
             if (employeeDelete != null)
             {
+
                 List<Territories> territoriesList = new List<Territories>(deleteEmployee.Territories);
 
                 foreach (var territories in territoriesList)
@@ -45,6 +47,10 @@ namespace Practica3.EF.Logic
                 context.SaveChanges();
 
             }
+            else
+            {
+                throw new NullReferenceException("No existe el Empleado que desea eliminar");
+            }
 
 
         }
@@ -54,10 +60,36 @@ namespace Practica3.EF.Logic
             return context.Employees.ToList();
         }
 
+        public Employees GetById(int id)
+        {
+            try
+            {
+                var employee = context.Employees.Where(e => e.EmployeeID == id).FirstOrDefault();
+                return employee;
+
+            }
+            catch (NullReferenceException)
+            {
+                throw new NullReferenceException("No se encontró el ID deseado");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+
+        }
+
+
         public void Update(Employees employees)
         {
             var employeesUpdate = context.Employees.Find(employees.EmployeeID);
-
+            if (employees.LastName == null|| employees.FirstName == null)
+            {
+                throw new NullReferenceException("Los campos nombre y apellido son obligatorios.");
+            }
             employeesUpdate.LastName = employees.LastName;
             employeesUpdate.FirstName = employees.FirstName;
             employeesUpdate.HomePhone = employees.HomePhone;
