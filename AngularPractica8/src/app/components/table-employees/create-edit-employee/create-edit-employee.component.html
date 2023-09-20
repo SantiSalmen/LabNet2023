@@ -1,0 +1,51 @@
+<div class="container">
+    <mat-toolbar>
+        <span>Crear/Editar</span>
+    </mat-toolbar>
+        <form [formGroup]="form" (ngSubmit)="addEdit()">
+            <mat-card>
+                <mat-grid-list cols="4" rowHeight="100px">
+                    <mat-grid-tile
+                        [colspan]="1"
+                        [rowspan]="1">
+                        Empleado
+                    </mat-grid-tile>
+                    <mat-grid-tile
+                    [colspan]="3"
+                    [rowspan]="5">
+                    <img src="../../../assets/img/trabajador.png">
+                    </mat-grid-tile>
+                    <mat-grid-tile
+                        [colspan]="1"
+                        [rowspan]="1">
+                        <mat-form-field class="imp">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput autocomplete="off" formControlName="name">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile
+                        [colspan]="1"
+                        [rowspan]="1">
+                        <mat-form-field class="imp">
+                            <mat-label>Apellido</mat-label>
+                            <input matInput autocomplete="off" formControlName="lastname">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile
+                        [colspan]="1"
+                        [rowspan]="1">
+                        <mat-form-field class="imp">
+                            <mat-label>Telefono</mat-label>
+                            <input matInput autocomplete="off" formControlName="homePhone">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile
+                        [colspan]="1"
+                        [rowspan]="1">
+                        <button type="submit" [disabled]="form.invalid" mat-raised-button color="primary">Guardar</button>
+                        <button mat-raised-button color="warn" routerLink="/table-employee" style="margin-left: 15px;">Volver</button>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </mat-card>
+        </form>
+</div>

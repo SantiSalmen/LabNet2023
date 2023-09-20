@@ -1,0 +1,14 @@
+
+mat-card{
+    margin-top: 2%;
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color:rgba(132, 146, 249, 0.882);
+}
+
+mat-toolbar{
+    background-color:rgba(132, 146, 249, 0.882);
+}
+.imp{
+    width: 80%;
+}
