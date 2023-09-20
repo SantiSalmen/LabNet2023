@@ -22,5 +22,6 @@ namespace Practica7.EF.WebApi
             GlobalConfiguration.Configuration.Formatters.Clear();
             GlobalConfiguration.Configuration.Formatters.Add(new JsonMediaTypeFormatter());
         }
+      
     }
 }

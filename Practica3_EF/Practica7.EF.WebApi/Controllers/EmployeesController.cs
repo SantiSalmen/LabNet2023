@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
-
+using System.Web.Http.Cors;
 
 namespace Practica7.EF.WebApi.Controllers
 {
-
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class EmployeesController : ApiController
     {
         EmployeesLogic logic = new EmployeesLogic();
@@ -55,7 +55,7 @@ namespace Practica7.EF.WebApi.Controllers
             }
             catch (NullReferenceException ex)
             {
-                return Content(HttpStatusCode.BadRequest, ex);
+                return Content(HttpStatusCode.BadRequest, ex.Message);
             }
             catch (Exception ex)
             {
@@ -64,7 +64,7 @@ namespace Practica7.EF.WebApi.Controllers
             }
         }
 
-        public IHttpActionResult Post([FromBody] EmployeesView employeesView) 
+        public IHttpActionResult Post([FromBody] EmployeesView employeesView)
         {
             try
             {
@@ -75,7 +75,7 @@ namespace Practica7.EF.WebApi.Controllers
                     HomePhone = employeesView.homePhone
                 };
                 this.logic.Add(employee);
-                return Content(HttpStatusCode.Created,employee);
+                return Content(HttpStatusCode.Created, employee);
             }
             catch (NullReferenceException ex)
             {
@@ -90,15 +90,25 @@ namespace Practica7.EF.WebApi.Controllers
 
         public IHttpActionResult Put([FromBody] EmployeesView employee)
         {
-
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest();
-            }
 
-            Employees employeesEntity = new Employees { EmployeeID = employee.id, FirstName = employee.firstName, LastName = employee.lastName, HomePhone = employee.homePhone };
-            logic.Update(employeesEntity);
-            return Ok(employeesEntity);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+
+                Employees employeesEntity = new Employees { EmployeeID = employee.id, FirstName = employee.firstName, LastName = employee.lastName, HomePhone = employee.homePhone };
+                logic.Update(employeesEntity);
+
+                return Ok(employeesEntity);
+
+            }
+            catch (NullReferenceException e)
+            {
+
+                return Content(HttpStatusCode.NotFound, e.Message);
+            }
 
         }
 
@@ -109,7 +119,7 @@ namespace Practica7.EF.WebApi.Controllers
             {
 
                 Employees employee = new Employees();
-            
+
                 foreach (Employees eList in logic.GetAll())
                 {
                     if (id == eList.EmployeeID)

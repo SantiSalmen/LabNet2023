@@ -9,9 +9,34 @@ namespace Practica3.EF.Logic
     {
         public void Add(Employees newEmployees)
         {
-            context.Employees.Add(newEmployees);
+            try
+            {
 
-            context.SaveChanges();
+                if (newEmployees.FirstName != null && newEmployees.LastName != null)
+                {
+
+                    context.Employees.Add(newEmployees);
+
+                    context.SaveChanges();
+
+                }
+                else
+                {
+                    throw new NullReferenceException("Los campos nombre y apellido son obligatorios.");
+                }
+
+            }
+            catch (NullReferenceException)
+            {
+
+                throw new NullReferenceException("El empleado se pudo agregar");
+            }
+            catch (Exception)
+            {
+
+                throw new Exception("El empleado se pudo agregar");
+            }
+
         }
 
         public void Delete(Employees deleteEmployee)
@@ -41,7 +66,7 @@ namespace Practica3.EF.Logic
                     context.Orders.Remove(orders);
 
                 }
-                    
+
                 context.Employees.Remove(employeeDelete);
 
                 context.SaveChanges();
@@ -85,16 +110,28 @@ namespace Practica3.EF.Logic
 
         public void Update(Employees employees)
         {
-            var employeesUpdate = context.Employees.Find(employees.EmployeeID);
-            if (employees.LastName == null|| employees.FirstName == null)
+            try
             {
-                throw new NullReferenceException("Los campos nombre y apellido son obligatorios.");
-            }
-            employeesUpdate.LastName = employees.LastName;
-            employeesUpdate.FirstName = employees.FirstName;
-            employeesUpdate.HomePhone = employees.HomePhone;
+                var employeesUpdate = context.Employees.Find(employees.EmployeeID);
+                if (employees.LastName == null || employees.FirstName == null)
+                    throw new NullReferenceException("Los campos nombre y apellido son obligatorios.");
 
-            context.SaveChanges();
+                employeesUpdate.LastName = employees.LastName;
+                employeesUpdate.FirstName = employees.FirstName;
+                employeesUpdate.HomePhone = employees.HomePhone;
+
+                context.SaveChanges();
+
+            }
+            catch (InvalidOperationException)
+            {
+
+                throw new InvalidOperationException("No se pudo realizar la operacion.");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
