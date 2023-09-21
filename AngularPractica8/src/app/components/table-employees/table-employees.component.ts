@@ -4,6 +4,7 @@ import { employeeDto } from 'src/app/Core/Models/employeeDto';
 import { SharedInfoService } from '../service/shared-info.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -21,7 +22,7 @@ export class TableEmployeesComponent {
   selectedEmployee: employeeDto | null = null;
   selectedId: number | null = null;
 
-  constructor(private _employeesService: EmployeesService, private _sharedInfoService: SharedInfoService){
+  constructor(private _employeesService: EmployeesService, private _sharedInfoService: SharedInfoService, private _snackBar: MatSnackBar){
   };
   
   ngOnInit(): void{
@@ -75,12 +76,16 @@ export class TableEmployeesComponent {
     if (this.selectedId !== null) {
       this._employeesService.deleteEployee(this.selectedId).subscribe({
         next:()=>{
+          this._snackBar.open('Se eliminó correctamente el empleado','',{
+            duration: 5000,
+            horizontalPosition: 'center',
+            verticalPosition: 'bottom'
+          })
           this.selectedId = null;
           this.getAllEmployees();
         },
         error:()=>{
-          console.log("No existe el usuario");
-          alert("No existe el usuario");
+          alert("No existe el empleado");
         }
 
     });
