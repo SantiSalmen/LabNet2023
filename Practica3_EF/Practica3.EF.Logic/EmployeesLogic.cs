@@ -22,19 +22,19 @@ namespace Practica3.EF.Logic
                 }
                 else
                 {
-                    throw new NullReferenceException("Los campos nombre y apellido son obligatorios.");
+                    throw new NullReferenceException();
                 }
 
             }
             catch (NullReferenceException)
             {
 
-                throw new NullReferenceException("El empleado se pudo agregar");
+                throw new NullReferenceException("El empleado no se pudo agregar");
             }
             catch (Exception)
             {
 
-                throw new Exception("El empleado se pudo agregar");
+                throw new Exception("El empleado no se pudo agregar");
             }
 
         }
@@ -97,10 +97,10 @@ namespace Practica3.EF.Logic
             {
                 throw new NullReferenceException("No se encontró el ID deseado");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw new Exception(ex.Message); ;
             }
 
 
@@ -128,9 +128,9 @@ namespace Practica3.EF.Logic
 
                 throw new InvalidOperationException("No se pudo realizar la operacion.");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw new Exception(ex.Message);
             }
         }
     }

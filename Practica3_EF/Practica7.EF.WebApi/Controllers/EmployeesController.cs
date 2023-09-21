@@ -35,7 +35,7 @@ namespace Practica7.EF.WebApi.Controllers
             catch (Exception ex)
             {
 
-                return Content(HttpStatusCode.BadRequest, ex);
+                return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
         public IHttpActionResult Get(int id)
@@ -60,7 +60,7 @@ namespace Practica7.EF.WebApi.Controllers
             catch (Exception ex)
             {
 
-                return Content(HttpStatusCode.BadRequest, ex);
+                return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
 
@@ -84,7 +84,7 @@ namespace Practica7.EF.WebApi.Controllers
             catch (Exception ex)
             {
 
-                return Content(HttpStatusCode.BadRequest, ex);
+                return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
 
@@ -136,7 +136,7 @@ namespace Practica7.EF.WebApi.Controllers
             catch (NullReferenceException e)
             {
 
-                return Content(HttpStatusCode.BadRequest, e);
+                return Content(HttpStatusCode.BadRequest, e.Message);
             }
         }
 
