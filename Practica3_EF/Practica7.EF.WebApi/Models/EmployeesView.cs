@@ -18,8 +18,8 @@ namespace Practica7.EF.WebApi.Models
         public string lastName { get; set; }
 
         [MaxLength(15, ErrorMessage ="No cumple con el formato requerido")]
-        [MinLength(10, ErrorMessage = "No cumple con el formato requerido")]
         [Display(Name = "Telefono")]
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Este campo solo debe contener números.")]
         public string homePhone { get; set; }
     }
 }

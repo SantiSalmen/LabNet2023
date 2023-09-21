@@ -52,15 +52,12 @@ export class TableEmployeesComponent {
   }
   
   goCreate(){
-    console.log('entro3');
     if (this.selectedEmployee != null) 
     {
-      console.log('entro');
       this.selectedEmployee = null;
       this.sendInfo(this.selectedEmployee)
     }
       else {
-        console.log('entro2');
         this.sendInfo(this.selectedEmployee);
       }
 

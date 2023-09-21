@@ -26,15 +26,14 @@ export class CreateEditEmployeeComponent
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(20)]],
       lastname: ['', [Validators.required, Validators.maxLength(20)]],
-      homePhone: ['',[Validators.minLength(10), Validators.maxLength(15)]]
+      homePhone: ['',[ Validators.minLength(10), Validators.maxLength(15),Validators.pattern(/^[0-9]+$/)]]
     })
   }
 
   ngOnInit(){
 
     this.selectedEmployee = this._sharedInfoService.getSelectedEmployee();
-    this.selectedId = this._sharedInfoService.getSelectedEmployee().id;
-     console.log(this.selectedEmployee)
+    this.selectedId = this.selectedEmployee != null ? this._sharedInfoService.getSelectedEmployee().id : null;
     if (this.selectedEmployee) {
       this.form.patchValue({
         name: this.selectedEmployee.firstName,
@@ -54,7 +53,7 @@ export class CreateEditEmployeeComponent
       id: this.selectedEmployee?.id,
       firstName: this.form.value.name,
       lastName: this.form.value.lastname,
-      homePhone: this.form.value.homePhone,
+      homePhone: this.form.value?.homePhone,
     };
     if (this.selectedId == null) 
     {
@@ -81,7 +80,6 @@ export class CreateEditEmployeeComponent
           this.router.navigate(['/table-employees'])
         },
         error:()=>{
-          console.log(this.selectedEmployee)
           alert("No se pudo actualizar el empleado");
         }
       });
