@@ -10,7 +10,7 @@ using System.Web.Http.Cors;
 
 namespace Practica7.EF.WebApi.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class EmployeesController : ApiController
     {
         EmployeesLogic logic = new EmployeesLogic();
