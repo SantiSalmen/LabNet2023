@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { EmployeesService } from '../service/employees.service';
 import { employeeDto } from 'src/app/Core/Models/employeeDto';
 import { SharedInfoService } from '../service/shared-info.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 
@@ -15,12 +17,13 @@ let ELEMENT_DATA: employeeDto[] = [];
 
 export class TableEmployeesComponent {
   displayedColumns: string[] = ['id', 'FirstName', 'LastName', 'homePhone'];
-  dataSource = ELEMENT_DATA;
+  dataSource = new MatTableDataSource<employeeDto>(ELEMENT_DATA);;
   selectedEmployee: employeeDto | null = null;
   selectedId: number | null = null;
 
   constructor(private _employeesService: EmployeesService, private _sharedInfoService: SharedInfoService){
   };
+  
   ngOnInit(): void{
     this.getAllEmployees();
   }
@@ -29,18 +32,13 @@ export class TableEmployeesComponent {
     this.getAllEmployees();
 
   }
-
-  getAllEmployees(){
-    this._employeesService.getEmployees().subscribe({
-      next:(result)=>{
-        this.dataSource = result;
-      },
-      error:(error)=>{
-        console.log(error);
-      } 
-    });
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
-  
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+
   selectRow(employee: any): void {
     this.selectedId = employee.id;
     this.selectedEmployee = {
@@ -54,12 +52,23 @@ export class TableEmployeesComponent {
   
   callsSend(){
     if (this.selectedEmployee !== null) {
-    this.sendInfo(this.selectedEmployee);
+      this.sendInfo(this.selectedEmployee);
     }
   }
 
   sendInfo(employee: employeeDto){
      this._sharedInfoService.setSelectedEmployee(employee);
+  }
+  
+  getAllEmployees(){
+    this._employeesService.getEmployees().subscribe({
+      next:(result)=>{
+        this.dataSource.data = result;
+      },
+      error:(error)=>{
+        console.log(error);
+      } 
+    });
   }
   
   deleteButton(): void {

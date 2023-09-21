@@ -16,6 +16,7 @@ import { SharedInfoService } from '../../service/shared-info.service';
 export class CreateEditEmployeeComponent 
 {
   selectedEmployee: employeeDto | undefined;
+  employee: employeeDto | undefined;
   form: FormGroup;
   constructor(private fb: FormBuilder, 
               private _employeesService: EmployeesService, 
@@ -31,27 +32,30 @@ export class CreateEditEmployeeComponent
 
   ngOnInit(){
     this.selectedEmployee = this._sharedInfoService.getSelectedEmployee();
-    this.form = this.fb.group({
+    const initialValues = {
+      id: this.selectedEmployee?.id,
       name: this.selectedEmployee?.firstName,
       lastname: this.selectedEmployee?.lastName,
       homePhone:  this.selectedEmployee?.homePhone
     
-  });
-  console.log(this.selectedEmployee)
+  };
+  this.form.patchValue(initialValues);
 }
+
+
 
 
   addEdit()
   {
-    this.selectedEmployee  = {
+    this.employee  = {
+      id: this.selectedEmployee?.id,
       firstName: this.form.value.name,
       lastName: this.form.value.lastname,
       homePhone: this.form.value.homePhone,
     };
-    console.log(this.selectedEmployee);
-    if (this.selectedEmployee.id == null) 
+    if (this.employee.id == null) 
     {
-      this._employeesService.postEmployee(this.selectedEmployee).subscribe
+      this._employeesService.postEmployee(this.employee).subscribe
       ({
         next:()=>{
           alert('El empleado se agregó correctamente');
@@ -64,14 +68,14 @@ export class CreateEditEmployeeComponent
     }
     else
     {
-      this._employeesService.postEmployee(this.selectedEmployee).subscribe
+      this._employeesService.putEmployee(this.employee).subscribe
       ({
         next:()=>{
           alert('El empleado se actualizó correctamente');
           this.router.navigate(['/table-employees'])
         },
         error:()=>{
-          alert("No se pudo agregar el empleado");
+          alert("No se pudo actualizar el empleado");
         }
       });
     }
