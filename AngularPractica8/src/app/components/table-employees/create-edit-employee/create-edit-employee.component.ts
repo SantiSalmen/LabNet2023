@@ -16,7 +16,7 @@ import { SharedInfoService } from '../../service/shared-info.service';
 export class CreateEditEmployeeComponent 
 {
   selectedEmployee: employeeDto | undefined;
-  employee: employeeDto | undefined;
+  selectedId: number | null = null;
   form: FormGroup;
   constructor(private fb: FormBuilder, 
               private _employeesService: EmployeesService, 
@@ -31,34 +31,38 @@ export class CreateEditEmployeeComponent
   }
 
   ngOnInit(){
+
     this.selectedEmployee = this._sharedInfoService.getSelectedEmployee();
-    const initialValues = {
-      id: this.selectedEmployee?.id,
-      name: this.selectedEmployee?.firstName,
-      lastname: this.selectedEmployee?.lastName,
-      homePhone:  this.selectedEmployee?.homePhone
-    
-  };
-  this.form.patchValue(initialValues);
-}
+    this.selectedId = this._sharedInfoService.getSelectedEmployee().id;
+     console.log(this.selectedEmployee)
+    if (this.selectedEmployee) {
+      this.form.patchValue({
+        name: this.selectedEmployee.firstName,
+        lastname: this.selectedEmployee.lastName,
+        homePhone: this.selectedEmployee.homePhone
 
+  });
+ 
+  }
 
+  }
 
 
   addEdit()
   {
-    this.employee  = {
+    this.selectedEmployee  = {
       id: this.selectedEmployee?.id,
       firstName: this.form.value.name,
       lastName: this.form.value.lastname,
       homePhone: this.form.value.homePhone,
     };
-    if (this.employee.id == null) 
+    if (this.selectedId == null) 
     {
-      this._employeesService.postEmployee(this.employee).subscribe
+      this._employeesService.postEmployee(this.selectedEmployee).subscribe
       ({
         next:()=>{
           alert('El empleado se agregó correctamente');
+          this.resetForm();
           this.router.navigate(['/table-employees'])
         },
         error:()=>{
@@ -68,18 +72,24 @@ export class CreateEditEmployeeComponent
     }
     else
     {
-      this._employeesService.putEmployee(this.employee).subscribe
+      this._employeesService.putEmployee(this.selectedEmployee).subscribe
       ({
-        next:()=>{
+        next:()=>
+        {
           alert('El empleado se actualizó correctamente');
+          this.resetForm();
           this.router.navigate(['/table-employees'])
         },
         error:()=>{
+          console.log(this.selectedEmployee)
           alert("No se pudo actualizar el empleado");
         }
       });
     }
 
+  }
+  resetForm() {
+    this.form.reset();
   }
 
 }

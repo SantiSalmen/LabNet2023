@@ -6,7 +6,7 @@
 <mat-card>
   <mat-grid-list cols="3" rowHeight="80px">
     <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <button mat-raised-button color="primary" routerLink="/create-edit-employee">Crear</button>
+      <button mat-raised-button color="primary" (click)="goCreate()" routerLink="/create-edit-employee">Crear</button>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <button  mat-raised-button  [disabled]="selectedId === null" (click)="callsSend()" routerLink="/create-edit-employee">Editar</button>

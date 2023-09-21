@@ -4,7 +4,7 @@ import { employeeDto } from 'src/app/Core/Models/employeeDto';
 import { SharedInfoService } from '../service/shared-info.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 
 
@@ -18,11 +18,12 @@ let ELEMENT_DATA: employeeDto[] = [];
 
 export class TableEmployeesComponent {
   displayedColumns: string[] = ['id', 'FirstName', 'LastName', 'homePhone'];
-  dataSource = new MatTableDataSource<employeeDto>(ELEMENT_DATA);;
+  dataSource = new MatTableDataSource<employeeDto>(ELEMENT_DATA);
+;
   selectedEmployee: employeeDto | null = null;
   selectedId: number | null = null;
 
-  constructor(private _employeesService: EmployeesService, private _sharedInfoService: SharedInfoService, private _snackBar: MatSnackBar){
+  constructor(private _employeesService: EmployeesService, private _sharedInfoService: SharedInfoService, router: Router){
   };
   
   ngOnInit(): void{
@@ -48,16 +49,30 @@ export class TableEmployeesComponent {
       lastName: employee.lastName,
       homePhone: employee.homePhone
     };
-    console.log( this.selectedId );
   }
   
+  goCreate(){
+    console.log('entro3');
+    if (this.selectedEmployee != null) 
+    {
+      console.log('entro');
+      this.selectedEmployee = null;
+      this.sendInfo(this.selectedEmployee)
+    }
+      else {
+        console.log('entro2');
+        this.sendInfo(this.selectedEmployee);
+      }
+
+  }
+
   callsSend(){
     if (this.selectedEmployee !== null) {
       this.sendInfo(this.selectedEmployee);
     }
   }
 
-  sendInfo(employee: employeeDto){
+  sendInfo(employee: employeeDto | null){
      this._sharedInfoService.setSelectedEmployee(employee);
   }
   
@@ -76,19 +91,16 @@ export class TableEmployeesComponent {
     if (this.selectedId !== null) {
       this._employeesService.deleteEployee(this.selectedId).subscribe({
         next:()=>{
-          this._snackBar.open('Se eliminó correctamente el empleado','',{
-            duration: 5000,
-            horizontalPosition: 'center',
-            verticalPosition: 'bottom'
-          })
           this.selectedId = null;
           this.getAllEmployees();
         },
         error:()=>{
-          alert("No existe el empleado");
+          console.log("No existe el usuario");
+          alert("No existe el usuario");
         }
 
     });
     }
   }
 }
+
